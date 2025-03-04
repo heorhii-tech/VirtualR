@@ -64,7 +64,7 @@ const Navbar = () => {
         </div>
         {mobileDrawerOpen && (
           <div className="fixed top-12 right-0 z-20 bg-neutral-900 w-full p-12 flex flex-col justify-center items-center lg:hidden h-[calc(100vh-3rem)] gap-4">
-            <div>
+            
               {navItems.map((item, index) => (
              
                   <a href={item.href} key={index} onClick={closeMobileDrawer} className="p-2 flex flex-col gap-4 border rounded-md border-zinc-300 w-[180px] text-center">
@@ -72,7 +72,7 @@ const Navbar = () => {
                   </a>
          
               ))}
-            </div>
+            
             <div className="flex flex-col gap-4 ">
               <AuthModal defaultView="login" className="w-[180px] text-center" /> 
               <AuthModal defaultView="signup" className="w-[180px] text-center" /> 

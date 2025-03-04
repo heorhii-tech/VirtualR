@@ -2,6 +2,7 @@ import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import logo from "../assets/logo.png";
 import { navItems } from "../constants";
+import AuthModal from "./AuthModal"; 
 
 const Navbar = () => {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
@@ -39,7 +40,7 @@ const Navbar = () => {
               VirtualR
             </a>
           </div>
-          <ul className="hidden lg:flex ml-14 space-x-12">
+          <ul className="hidden lg:flex ml-auto mr-10 space-x-12">
             {navItems.map((item, index) => (
               <li key={index}>
                 <a
@@ -51,19 +52,9 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-          <div className="hidden lg:flex justify-center  items-center gap-4">
-            <a
-              href="#"
-              className="py-2 px-3 border rounded-md hover:opacity-70 transition-all duration-200"
-            >
-              Login
-            </a>
-            <a
-              href="#"
-              className="bg-gradient-to-r from-orange-500 to-orange-800 py-[9px] px-3 rounded-md hover:opacity-70 transition-all duration-200"
-            >
-              Create an account
-            </a>
+          <div className="hidden lg:flex justify-center items-center gap-4">
+            <AuthModal defaultView="login" /> {/* Кнопка Login */}
+            <AuthModal defaultView="signup" /> {/* Кнопка Sign Up */}
           </div>
           <div className="lg:hidden md:flex flex-col justify-end">
             <button onClick={toggleNavbar}>
@@ -72,32 +63,19 @@ const Navbar = () => {
           </div>
         </div>
         {mobileDrawerOpen && (
-          <div className="fixed top-0 right-0 z-20 bg-neutral-900 w-full p-12 flex flex-col justify-center items-center lg:hidden h-screen gap-4">
-            <div className="flex flex-col space-y-4">
+          <div className="fixed top-12 right-0 z-20 bg-neutral-900 w-full p-12 flex flex-col justify-center items-center lg:hidden h-[calc(100vh-3rem)] gap-4">
+            <div>
               {navItems.map((item, index) => (
-                <a
-                  key={index}
-                  href={item.href}
-                  onClick={closeMobileDrawer}
-                  className="py-[6px] px-3 border rounded-md max-w-[176px] text-center w-[176px]"
-                >
-                  {item.label}
-                </a>
+             
+                  <a href={item.href} key={index} onClick={closeMobileDrawer} className="p-2 flex flex-col gap-4 border rounded-md border-zinc-300 w-[180px] text-center">
+                    {item.label}
+                  </a>
+         
               ))}
             </div>
-            <div className="flex  flex-col ">
-              <a
-                href="/"
-                className="py-[6px] px-3 border rounded-md max-w-[176px] text-center"
-              >
-                Login
-              </a>
-              <a
-                href="/"
-                className="py-2 px-3 rounded-md bg-gradient-to-r from-orange-500 to-orange-800 mt-4 "
-              >
-                Create an account
-              </a>
+            <div className="flex flex-col gap-4 ">
+              <AuthModal defaultView="login" className="w-[180px] text-center" /> 
+              <AuthModal defaultView="signup" className="w-[180px] text-center" /> 
             </div>
           </div>
         )}

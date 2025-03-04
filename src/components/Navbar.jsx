@@ -72,25 +72,28 @@ const Navbar = () => {
           </div>
         </div>
         {mobileDrawerOpen && (
-          <div className="fixed top-0 right-0 z-20 bg-neutral-900 w-full p-12 flex flex-col justify-center items-center lg:hidden h-screen">
-            <ul>
+          <div className="fixed top-0 right-0 z-20 bg-neutral-900 w-full p-12 flex flex-col justify-center items-center lg:hidden h-screen gap-4">
+            <div className="flex flex-col space-y-4">
               {navItems.map((item, index) => (
-                <li key={index} className="py-4">
-                  <a href={item.href} onClick={closeMobileDrawer}>
-                    {item.label}
-                  </a>
-                </li>
+                <a
+                  key={index}
+                  href={item.href}
+                  onClick={closeMobileDrawer}
+                  className="py-[6px] px-3 border rounded-md max-w-[176px] text-center w-[176px]"
+                >
+                  {item.label}
+                </a>
               ))}
-            </ul>
-            <div className="flex  flex-col">
+            </div>
+            <div className="flex  flex-col ">
               <a
-                href="#"
+                href="/"
                 className="py-[6px] px-3 border rounded-md max-w-[176px] text-center"
               >
                 Login
               </a>
               <a
-                href="#"
+                href="/"
                 className="py-2 px-3 rounded-md bg-gradient-to-r from-orange-500 to-orange-800 mt-4 "
               >
                 Create an account

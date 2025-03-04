@@ -1,5 +1,5 @@
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import logo from "../assets/logo.png";
 import { navItems } from "../constants";
 
@@ -10,13 +10,32 @@ const Navbar = () => {
     setMobileDrawerOpen(!mobileDrawerOpen);
   };
 
+  const closeMobileDrawer = () => {
+    setMobileDrawerOpen(false);
+  };
+
+  useEffect(() => {
+    if (mobileDrawerOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [mobileDrawerOpen]);
+
   return (
     <nav className="sticky top-0 z-50 py-3 backdrop-blur-lg border-b border-neutral-700/80">
       <div className="container px-4 mx-auto relative lg:text-sm">
         <div className="flex justify-between items-center">
           <div className="flex items-center flex-shrink-0">
             <img className="h-10 w-10 mr-2" src={logo} alt="Logo" />
-            <a href="/" className="text-xl tracking-tight hover:opacity-70 transition-all duration-200 cursor-pointer">
+            <a
+              href="/"
+              className="text-xl tracking-tight hover:opacity-70 transition-all duration-200 cursor-pointer"
+            >
               VirtualR
             </a>
           </div>
@@ -24,8 +43,8 @@ const Navbar = () => {
             {navItems.map((item, index) => (
               <li key={index}>
                 <a
-                  className="hover:opacity-70 transition-all duration-200"
                   href={item.href}
+                  className="hover:opacity-70 transition-all duration-200"
                 >
                   {item.label}
                 </a>
@@ -57,12 +76,17 @@ const Navbar = () => {
             <ul>
               {navItems.map((item, index) => (
                 <li key={index} className="py-4">
-                  <a href={item.href}>{item.label}</a>
+                  <a href={item.href} onClick={closeMobileDrawer}>
+                    {item.label}
+                  </a>
                 </li>
               ))}
             </ul>
             <div className="flex  flex-col">
-              <a href="#" className="py-[6px] px-3 border rounded-md max-w-[176px] text-center">
+              <a
+                href="#"
+                className="py-[6px] px-3 border rounded-md max-w-[176px] text-center"
+              >
                 Login
               </a>
               <a

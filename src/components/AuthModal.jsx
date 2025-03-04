@@ -1,4 +1,3 @@
-
 import { useAuth } from "../hooks/useAuth";
 import {
   Modal,
@@ -11,10 +10,16 @@ import {
   CircularProgress, // Компонент для анимации загрузки
 } from "@mui/material";
 
-const AuthModal = ({ defaultView = "login" }) => {
-  const { isOpen, handleOpen, handleClose, view, setView, handleFormSubmit, isLoading } = useAuth();
- 
-
+const AuthModal = ({
+  defaultView = "login",
+  handleClose,
+  handleOpen,
+  isOpen,
+  view,
+  setView,
+  handleFormSubmit,
+  isLoading,
+}) => {
   return (
     <>
       <Button
@@ -57,7 +62,11 @@ const AuthModal = ({ defaultView = "login" }) => {
             border: "1px solid rgba(255, 255, 255, 0.1)",
           }}
         >
-          <Typography variant="h5" component="h2" sx={{ mb: 2, color: "white" }}>
+          <Typography
+            variant="h5"
+            component="h2"
+            sx={{ mb: 2, color: "white" }}
+          >
             {view === "login" ? "Login" : "Sign Up"}
           </Typography>
           <form onSubmit={handleFormSubmit}>
@@ -157,18 +166,22 @@ const AuthModal = ({ defaultView = "login" }) => {
               >
                 {isLoading ? ( // Если загрузка, показываем индикатор
                   <CircularProgress size={24} sx={{ color: "black" }} />
+                ) : view === "login" ? (
+                  "Login"
                 ) : (
-                  view === "login" ? "Login" : "Sign Up"
+                  "Sign Up"
                 )}
               </Button>
             </Stack>
           </form>
           <Typography sx={{ mt: 2, textAlign: "center", color: "white" }}>
-            {view === "login" ? "Don't have an account? " : "Already have an account? "}
+            {view === "login"
+              ? "Don't have an account? "
+              : "Already have an account? "}
             <Link
               component="button"
               onClick={() => setView(view === "login" ? "signup" : "login")}
-              sx={{ 
+              sx={{
                 cursor: "pointer",
                 color: "orange",
                 "&:hover": {
